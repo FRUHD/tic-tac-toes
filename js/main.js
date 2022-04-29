@@ -23,9 +23,9 @@ class Board {
     constructor() {
         //store winningConditions as an array of positions, where 0 is top left, 8 is bottom right
         this.winningConditions = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,7],[2,4,8]];
-        //Board stores player one's moves
+        //Board stores player one's moves (AKA player 'X')
         this.playerOneMoves = []; 
-        //Board stores player two's moves
+        //Board stores player two's moves (AKA player 'O')
         this.playerTwoMoves = []; 
         //Board stores all used moves
         this.usedMoves = [0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -33,16 +33,26 @@ class Board {
     }
   
     // Prompt each player's turn:
-    // 1. Determine if location is available
-    // 2. Give location to player
+    // 1. Determine if location is available && if so, update usedMoves
+    // 2. Give location to respective player (array)
+    // 3. Check if player has won
+    // 4. If no win, change player's turn
     playerTurn(location) {
-
+      // 1. Determine if location is available && if so, update usedMoves
+      if (this.usedMoves[location] === !0) {
+        //Player cannot go here
+        return
+      } else {
+        this.usedMoves[location] = 1
+      }
+      // 2. Give location to respective player (array)
+      turnX ? this.playerOneMoves.push(location) : this.playerTwoMoves.push(location)
+      // 3. Check if player has won
+      // 4. If no win, change player's turn
     }
   
 
   //Just thinking down here - would this work?
-  let turnX = true;
-    
   const changeTurn = ()=>{
     turnX = !turnX;
   }
